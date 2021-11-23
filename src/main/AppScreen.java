@@ -1,54 +1,43 @@
 package main;
 
-import java.awt.Color;
+// import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Random;
-import java.util.ArrayList;
-import java.awt.image.BufferedImage;
+import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
 public class AppScreen extends JPanel {
 
-  private Random random;
-  private BufferedImage img;
+  private Dimension size;
+  private App app;
+  private Render render;
 
-  private ArrayList<BufferedImage> sprites = new ArrayList<>();
+  public AppScreen(App app) {
 
-  public AppScreen(BufferedImage img) {
+    this.app = app;
+    render = new Render(this);
 
-    this.img = img;
-
-    loadSprites();
-    random = new Random();
+    setPanelSize();
 
   }
 
-  private void loadSprites() {
+  private void setPanelSize() {
 
-    for (int i = 0; i < 16; i++) {
-      for (int j = 0; j < 16; j++) {
-        sprites.add(img.getSubimage(i * 32, j * 32, 32, 32));
-      }
-    }
+    int width = 640;
+    int height = 640;
+
+    size = new Dimension(width, height);
+    setMinimumSize(size);
+    setPreferredSize(size);
+    setMaximumSize(size);
+
   }
 
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
 
-    // g.drawImage(sprites.get(1), 0, 0, null);
+    render.render(g);
 
-    for (int i = 0; i < 20; i++) {
-      for (int j = 0; j < 20; j++) {
-
-        g.drawImage(sprites.get(getRandomInt()), i * 32, j * 32, null);
-      }
-    }
-
-  }
-
-  private int getRandomInt() {
-    return random.nextInt(256);
   }
 
   // private Color getRandomColor() {

@@ -1,11 +1,11 @@
 package main;
 
 import java.awt.image.BufferedImage;
-import java.io.InputStream;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
 import javax.swing.JFrame;
+
+import inputs.KeyboardListener;
+import inputs.MyMouseListener;
 
 public class App extends JFrame implements Runnable {
 
@@ -18,31 +18,30 @@ public class App extends JFrame implements Runnable {
     private final double FPS_SET = 120.0;
     private final double UPS_SET = 60.0;
 
+    private MyMouseListener myMouseListener;
+    private KeyboardListener keyboardListener;
+
     public App() {
 
-        importImg();
-
-        int width = 656;
-        int height = 679;
-
-        setSize(width, height);
         setDefaultCloseOperation(EXIT_ON_CLOSE); // Cuando se cierra la ventana se finaliza el programa
-        setLocationRelativeTo(null); // Centra la ventana
 
-        appScreen = new AppScreen(img);
+        appScreen = new AppScreen(this);
         add(appScreen);
+
+        pack();
+        setLocationRelativeTo(null); // Centra la ventana
         setVisible(true);
     }
 
-    private void importImg() {
+    private void initInputs() {
+        myMouseListener = new MyMouseListener();
+        keyboardListener = new KeyboardListener();
 
-        InputStream is = getClass().getResourceAsStream("/spriteatlas.png");
+        addMouseListener(myMouseListener);
+        addMouseMotionListener(myMouseListener);
+        addKeyListener(keyboardListener);
 
-        try {
-            img = ImageIO.read(is);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        requestFocus();
     }
 
     private void start() {
@@ -56,6 +55,8 @@ public class App extends JFrame implements Runnable {
         System.out.println("Inició el juego!");
 
         App app = new App();
+
+        app.initInputs();
         app.start();
     }
 
@@ -72,18 +73,22 @@ public class App extends JFrame implements Runnable {
         int frames = 0;
         int updates = 0;
 
+        long now;
+
         while (true) {
+
+            now = System.nanoTime();
             // Render
-            if (System.nanoTime() - lastFrame >= timePerFrame) {
+            if (now - lastFrame >= timePerFrame) {
                 repaint();
-                lastFrame = System.nanoTime();
+                lastFrame = now;
                 frames++;
             }
 
             // Update
-            if (System.nanoTime() - lastUpdate >= timePerUpdate) {
+            if (now - lastUpdate >= timePerUpdate) {
                 // updateGame();
-                lastUpdate = System.nanoTime();
+                lastUpdate = now;
                 updates++;
             }
 
