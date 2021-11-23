@@ -23,6 +23,9 @@ public class Render {
     case SETTINGS:
       app.getSettings().render(g);
       break;
+    case EDIT:
+      app.getEdit().render(g);
+      break;
     }
 
   }

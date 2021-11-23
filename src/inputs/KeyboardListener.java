@@ -24,6 +24,8 @@ public class KeyboardListener implements KeyListener {
       GameStates.gameState = PLAY;
     else if (e.getKeyCode() == KeyEvent.VK_D)
       GameStates.gameState = SETTINGS;
+    else if (e.getKeyCode() == KeyEvent.VK_F)
+      GameStates.gameState = EDIT;
 
   }
 

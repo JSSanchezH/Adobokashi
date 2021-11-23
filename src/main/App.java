@@ -6,6 +6,7 @@ import javax.swing.JFrame;
 
 import inputs.KeyboardListener;
 import inputs.MyMouseListener;
+import scenes.Edit;
 import scenes.Menu;
 import scenes.Play;
 import scenes.Settings;
@@ -29,6 +30,7 @@ public class App extends JFrame implements Runnable {
     private Menu menu;
     private Play play;
     private Settings settings;
+    private Edit edit;
 
     public App() {
 
@@ -36,6 +38,7 @@ public class App extends JFrame implements Runnable {
 
         initClasses();
 
+        setResizable(false);
         add(appScreen);
 
         pack();
@@ -50,6 +53,7 @@ public class App extends JFrame implements Runnable {
         menu = new Menu(this);
         play = new Play(this);
         settings = new Settings(this);
+        edit = new Edit(this);
     }
 
     private void initInputs() {
@@ -138,5 +142,9 @@ public class App extends JFrame implements Runnable {
 
     public Settings getSettings() {
         return settings;
+    }
+
+    public Edit getEdit() {
+        return edit;
     }
 }
