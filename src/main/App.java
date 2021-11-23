@@ -6,6 +6,9 @@ import javax.swing.JFrame;
 
 import inputs.KeyboardListener;
 import inputs.MyMouseListener;
+import scenes.Menu;
+import scenes.Play;
+import scenes.Settings;
 
 public class App extends JFrame implements Runnable {
 
@@ -21,16 +24,32 @@ public class App extends JFrame implements Runnable {
     private MyMouseListener myMouseListener;
     private KeyboardListener keyboardListener;
 
+    // Clases
+    private Render render;
+    private Menu menu;
+    private Play play;
+    private Settings settings;
+
     public App() {
 
         setDefaultCloseOperation(EXIT_ON_CLOSE); // Cuando se cierra la ventana se finaliza el programa
 
-        appScreen = new AppScreen(this);
+        initClasses();
+
         add(appScreen);
 
         pack();
         setLocationRelativeTo(null); // Centra la ventana
         setVisible(true);
+    }
+
+    private void initClasses() {
+        render = new Render(this);
+        appScreen = new AppScreen(this);
+
+        menu = new Menu(this);
+        play = new Play(this);
+        settings = new Settings(this);
     }
 
     private void initInputs() {
@@ -101,5 +120,23 @@ public class App extends JFrame implements Runnable {
             }
         }
 
+    }
+
+    // Getters and Setters
+
+    public Render getRender() {
+        return render;
+    }
+
+    public Menu getMenu() {
+        return menu;
+    }
+
+    public Play getPlay() {
+        return play;
+    }
+
+    public Settings getSettings() {
+        return settings;
     }
 }

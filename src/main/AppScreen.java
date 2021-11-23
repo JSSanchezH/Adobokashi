@@ -10,12 +10,10 @@ public class AppScreen extends JPanel {
 
   private Dimension size;
   private App app;
-  private Render render;
 
   public AppScreen(App app) {
 
     this.app = app;
-    render = new Render(this);
 
     setPanelSize();
 
@@ -36,7 +34,7 @@ public class AppScreen extends JPanel {
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
 
-    render.render(g);
+    app.getRender().render(g);
 
   }
 
