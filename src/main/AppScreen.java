@@ -21,6 +21,7 @@ public class AppScreen extends JPanel {
 
     loadSprites();
     random = new Random();
+
   }
 
   private void loadSprites() {
@@ -35,25 +36,26 @@ public class AppScreen extends JPanel {
   public void paintComponent(Graphics g) {
     super.paintComponent(g);
 
-    g.drawImage(sprites.get(1), 0, 0, null);
+    // g.drawImage(sprites.get(1), 0, 0, null);
 
-    // for (int i = 0; i < 20; i++) {
-    // for (int j = 0; j < 20; j++) {
-    // g.setColor(getRandomColor());
-    // g.fillRect(i * 32, j * 32, 32, 32);
-    // }
-    // }
+    for (int i = 0; i < 20; i++) {
+      for (int j = 0; j < 20; j++) {
+
+        g.drawImage(sprites.get(getRandomInt()), i * 32, j * 32, null);
+      }
+    }
+
   }
 
   private int getRandomInt() {
-    return random.nextInt(361);
+    return random.nextInt(256);
   }
 
-  private Color getRandomColor() {
-    int red = random.nextInt(256);
-    int green = random.nextInt(256);
-    int blue = random.nextInt(256);
+  // private Color getRandomColor() {
+  // int red = random.nextInt(256);
+  // int green = random.nextInt(256);
+  // int blue = random.nextInt(256);
 
-    return new Color(red, green, blue);
-  }
+  // return new Color(red, green, blue);
+  // }
 }
