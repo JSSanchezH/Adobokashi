@@ -40,7 +40,7 @@ public class AppScreen extends JPanel {
 
   private void setPanelSize() {
 
-    int width = 840;
+    int width = 1040;
     int height = 640;
 
     size = new Dimension(width, height);

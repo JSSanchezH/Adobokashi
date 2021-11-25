@@ -9,7 +9,8 @@ import help.LoadSave;
 public class TileManager {
 
   public Tile LEFT_WALL_1, LEFT_WALL_2, TOP_LEFT_CORNER, BOT_LEFT_CORNER, TOP_RIGHT_CORNER, BOT_RIGHT_CORNER,
-      BOT_WALL_1, BOT_WALL_2, TOP_WALL_1, TOP_WALL_2, STONE; // Corregir
+      BOT_WALL_1, BOT_WALL_2, TOP_WALL_1, TOP_WALL_2, STONE, FRONT_STAIR, WATER_1, WATER_2, WATER_3, LAVA_1, LAVA_2,
+      LAVA_3; // Corregir
 
   private BufferedImage atlas;
   public ArrayList<Tile> tiles = new ArrayList<>();
@@ -34,12 +35,23 @@ public class TileManager {
     tiles.add(BOT_WALL_2 = new Tile(getSprite(13, 15), id++, ""));
     tiles.add(BOT_WALL_2 = new Tile(getSprite(14, 15), id++, ""));
     tiles.add(BOT_RIGHT_CORNER = new Tile(getSprite(15, 15), id++, ""));
+    tiles.add(FRONT_STAIR = new Tile(getSprite(9, 15), id++, ""));
+    tiles.add(WATER_1 = new Tile(getSprite(3, 11), id++, ""));
+    tiles.add(WATER_2 = new Tile(getSprite(4, 11), id++, ""));
+    tiles.add(WATER_3 = new Tile(getSprite(5, 11), id++, ""));
+    tiles.add(LAVA_1 = new Tile(getSprite(3, 9), id++, ""));
+    tiles.add(LAVA_2 = new Tile(getSprite(4, 9), id++, ""));
+    tiles.add(LAVA_3 = new Tile(getSprite(5, 9), id++, ""));
 
   }
 
   private void loadAtlas() {
 
     atlas = LoadSave.getSpriteAtlas();
+  }
+
+  public Tile getTile(int id) {
+    return tiles.get(id);
   }
 
   public BufferedImage getSprite(int id) {

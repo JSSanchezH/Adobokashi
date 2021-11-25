@@ -17,6 +17,8 @@ public class BotBar {
 
   private MyButtons bMenu;
 
+  private Tile selectedTile;
+
   private Play play;
 
   private ArrayList<MyButtons> tileButtons = new ArrayList<>();
@@ -36,13 +38,24 @@ public class BotBar {
 
     int width = 50;
     int height = 50;
-    int x = 640;
+    int x = 645;
     int y = 50;
     int xOffset = 55;
+    int yOffset = 55;
     int i = 0;
+    int j = 0;
+    int k = 0;
     for (Tile tile : play.getTileManager().tiles) {
-      tileButtons.add(new MyButtons(tile.getName(), x + xOffset * i, y, width, height, i));
-      i++;
+
+      while (i < 6 && k < 18) {
+        tileButtons.add(new MyButtons(tile.getName(), x + xOffset * i, y + yOffset * j, width, height, k));
+        i++;
+        k++;
+
+      }
+      i = 0;
+      j++;
+
     }
 
   }
@@ -50,7 +63,16 @@ public class BotBar {
   private void drawButtons(Graphics g) {
     bMenu.draw(g);
     drawTileButtons(g);
+    drawSelectedTile(g);
 
+  }
+
+  private void drawSelectedTile(Graphics g) {
+    if (selectedTile != null) {
+      g.drawImage(selectedTile.getSprite(), 645, 500, 50, 50, null);
+      g.setColor(Color.BLACK);
+      g.drawRect(645, 500, 50, 50);
+    }
   }
 
   private void drawTileButtons(Graphics g) {
@@ -66,7 +88,6 @@ public class BotBar {
       g.drawRect(b.x, b.y, b.width, b.height);
 
       if (b.isMousePressed()) {
-        System.out.println("Hola");
         g.drawRect(b.x + 1, b.y + 1, b.width - 2, b.height - 2);
         g.drawRect(b.x + 2, b.y + 2, b.width - 4, b.height - 4);
       }
@@ -86,9 +107,17 @@ public class BotBar {
   }
 
   public void mouseClicked(int x, int y) {
-
     if (bMenu.getBounds().contains(x, y))
       SetGameState(MENU);
+    else {
+      for (MyButtons b : tileButtons) {
+        if (b.getBounds().contains(x, y)) {
+          selectedTile = play.getTileManager().getTile(b.getId());
+          play.setSelectedTile(selectedTile);
+          return;
+        }
+      }
+    }
 
   }
 
@@ -127,15 +156,16 @@ public class BotBar {
   }
 
   public void mouseReleased(int x, int y) {
-    resetButtons();
 
-    for (MyButtons b : tileButtons)
-      b.resetBooleans();
+    resetButtons();
 
   }
 
   private void resetButtons() {
     bMenu.resetBooleans();
+
+    for (MyButtons b : tileButtons)
+      b.resetBooleans();
   }
 
 }

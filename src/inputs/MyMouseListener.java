@@ -19,7 +19,31 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
 
   @Override
   public void mouseDragged(MouseEvent e) {
-    // TODO Auto-generated method stub
+    switch (GameStates.gameState) {
+    case MENU:
+      app.getMenu().mouseDragged(e.getX(), e.getY());
+
+      break;
+    case PLAY:
+      app.getPlay().mouseDragged(e.getX(), e.getY());
+
+      break;
+    case SETTINGS:
+      app.getSettings().mouseDragged(e.getX(), e.getY());
+
+      break;
+    case EDIT:
+      app.getEdit().mouseDragged(e.getX(), e.getY());
+
+      break;
+    case RNDM:
+      app.getRndm().mouseDragged(e.getX(), e.getY());
+
+      break;
+    default:
+      break;
+
+    }
 
   }
 
@@ -95,19 +119,19 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
       app.getMenu().mousePressed(e.getX(), e.getY());
       break;
     case PLAY:
-      app.getPlay().mouseClicked(e.getX(), e.getY());
+      app.getPlay().mousePressed(e.getX(), e.getY());
 
       break;
     case SETTINGS:
-      app.getSettings().mouseClicked(e.getX(), e.getY());
+      app.getSettings().mousePressed(e.getX(), e.getY());
 
       break;
     case EDIT:
-      app.getEdit().mouseClicked(e.getX(), e.getY());
+      app.getEdit().mousePressed(e.getX(), e.getY());
 
       break;
     case RNDM:
-      app.getRndm().mouseClicked(e.getX(), e.getY());
+      app.getRndm().mousePressed(e.getX(), e.getY());
 
       break;
     default:
@@ -124,19 +148,19 @@ public class MyMouseListener implements MouseListener, MouseMotionListener {
       app.getMenu().mouseReleased(e.getX(), e.getY());
       break;
     case PLAY:
-      app.getPlay().mouseClicked(e.getX(), e.getY());
+      app.getPlay().mouseReleased(e.getX(), e.getY());
 
       break;
     case SETTINGS:
-      app.getSettings().mouseClicked(e.getX(), e.getY());
+      app.getSettings().mouseReleased(e.getX(), e.getY());
 
       break;
     case EDIT:
-      app.getEdit().mouseClicked(e.getX(), e.getY());
+      app.getEdit().mouseReleased(e.getX(), e.getY());
 
       break;
     case RNDM:
-      app.getRndm().mouseClicked(e.getX(), e.getY());
+      app.getRndm().mouseReleased(e.getX(), e.getY());
 
       break;
     default:
