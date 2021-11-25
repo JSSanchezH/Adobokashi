@@ -6,7 +6,8 @@ import java.awt.Rectangle;
 
 public class MyButtons {
 
-  private int x, y, width, height;
+  public int x, y, width, height, id;
+
   private String text;
   private Rectangle bounds; // Limites
 
@@ -19,6 +20,20 @@ public class MyButtons {
     this.y = y;
     this.width = width;
     this.height = height;
+    this.id = -1;
+
+    initBounds();
+
+  }
+
+  public MyButtons(String text, int x, int y, int width, int height, int id) {
+
+    this.text = text;
+    this.x = x;
+    this.y = y;
+    this.width = width;
+    this.height = height;
+    this.id = id;
 
     initBounds();
 
@@ -76,11 +91,23 @@ public class MyButtons {
     this.mouseOver = mouseOver;
   }
 
+  public boolean isMouseOver() {
+    return mouseOver;
+  }
+
+  public boolean isMousePressed() {
+    return mousePressed;
+  }
+
   public void setMousePressed(boolean mousePressed) {
     this.mousePressed = mousePressed;
   }
 
   public Rectangle getBounds() {
     return bounds;
+  }
+
+  public int getId() {
+    return id;
   }
 }

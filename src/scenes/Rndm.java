@@ -9,11 +9,10 @@ import java.io.InputStream;
 import java.io.IOException;
 import javax.imageio.ImageIO;
 
-import userinterface.MyButtons;
-
-import static main.GameStates.*;
-
 import main.App;
+
+import userinterface.MyButtons;
+import static main.GameStates.*;
 
 public class Rndm extends GameScene implements SceneMethods {
 
@@ -25,15 +24,17 @@ public class Rndm extends GameScene implements SceneMethods {
 
   public Rndm(App app) {
     super(app);
-    initButtons();
 
     random = new Random();
     importImg();
     loadSprites();
+
+    initButtons();
+
   }
 
   private void initButtons() {
-    bMenu = new MyButtons("Menu", 2, 2, 60, 20);
+    bMenu = new MyButtons("Menu", 642, 2, 60, 20);
   }
 
   @Override
@@ -79,7 +80,6 @@ public class Rndm extends GameScene implements SceneMethods {
 
   @Override
   public void mouseClicked(int x, int y) {
-
     if (bMenu.getBounds().contains(x, y))
       SetGameState(MENU);
 
@@ -87,9 +87,7 @@ public class Rndm extends GameScene implements SceneMethods {
 
   @Override
   public void mouseMoved(int x, int y) {
-
     bMenu.setMouseOver(false);
-
     if (bMenu.getBounds().contains(x, y))
       bMenu.setMouseOver(true);
 
@@ -97,7 +95,6 @@ public class Rndm extends GameScene implements SceneMethods {
 
   @Override
   public void mousePressed(int x, int y) {
-
     if (bMenu.getBounds().contains(x, y))
       bMenu.setMousePressed(true);
   }
@@ -105,11 +102,11 @@ public class Rndm extends GameScene implements SceneMethods {
   @Override
   public void mouseReleased(int x, int y) {
     resetButtons();
-
   }
 
   private void resetButtons() {
     bMenu.resetBooleans();
+
   }
 
 }

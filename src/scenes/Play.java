@@ -1,6 +1,6 @@
 package scenes;
 
-import java.awt.Color;
+// import java.awt.Color;
 import java.awt.Graphics;
 
 import help.LevelBuilder;
@@ -22,7 +22,7 @@ public class Play extends GameScene implements SceneMethods {
 
     tileManager = new TileManager();
 
-    botBar = new BotBar(640, 0, 200, 640);
+    botBar = new BotBar(640, 0, 200, 640, this);
 
   }
 
@@ -38,6 +38,10 @@ public class Play extends GameScene implements SceneMethods {
 
     botBar.draw(g);
 
+  }
+
+  public TileManager getTileManager() {
+    return tileManager;
   }
 
   @Override
