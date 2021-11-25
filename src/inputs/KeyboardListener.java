@@ -26,6 +26,8 @@ public class KeyboardListener implements KeyListener {
       GameStates.gameState = SETTINGS;
     else if (e.getKeyCode() == KeyEvent.VK_F)
       GameStates.gameState = EDIT;
+    else if (e.getKeyCode() == KeyEvent.VK_G)
+      GameStates.gameState = RNDM;
 
   }
 

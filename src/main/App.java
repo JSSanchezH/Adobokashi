@@ -1,29 +1,21 @@
 package main;
 
-import java.awt.image.BufferedImage;
-
 import javax.swing.JFrame;
 
-import inputs.KeyboardListener;
-import inputs.MyMouseListener;
 import scenes.Edit;
 import scenes.Menu;
 import scenes.Play;
+import scenes.Rndm;
 import scenes.Settings;
 
 public class App extends JFrame implements Runnable {
 
     private AppScreen appScreen;
 
-    private BufferedImage img;
-
     private Thread gameThread;
 
     private final double FPS_SET = 120.0;
     private final double UPS_SET = 60.0;
-
-    private MyMouseListener myMouseListener;
-    private KeyboardListener keyboardListener;
 
     // Clases
     private Render render;
@@ -31,6 +23,7 @@ public class App extends JFrame implements Runnable {
     private Play play;
     private Settings settings;
     private Edit edit;
+    private Rndm rndm;
 
     public App() {
 
@@ -54,17 +47,7 @@ public class App extends JFrame implements Runnable {
         play = new Play(this);
         settings = new Settings(this);
         edit = new Edit(this);
-    }
-
-    private void initInputs() {
-        myMouseListener = new MyMouseListener();
-        keyboardListener = new KeyboardListener();
-
-        addMouseListener(myMouseListener);
-        addMouseMotionListener(myMouseListener);
-        addKeyListener(keyboardListener);
-
-        requestFocus();
+        rndm = new Rndm(this);
     }
 
     private void start() {
@@ -79,7 +62,7 @@ public class App extends JFrame implements Runnable {
 
         App app = new App();
 
-        app.initInputs();
+        app.appScreen.initInputs();
         app.start();
     }
 
@@ -146,5 +129,9 @@ public class App extends JFrame implements Runnable {
 
     public Edit getEdit() {
         return edit;
+    }
+
+    public Rndm getRndm() {
+        return rndm;
     }
 }

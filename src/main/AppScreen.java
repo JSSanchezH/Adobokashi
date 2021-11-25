@@ -4,12 +4,18 @@ package main;
 import java.awt.Graphics;
 import java.awt.Dimension;
 
+import inputs.KeyboardListener;
+import inputs.MyMouseListener;
+
 import javax.swing.JPanel;
 
 public class AppScreen extends JPanel {
 
   private Dimension size;
   private App app;
+
+  private MyMouseListener myMouseListener;
+  private KeyboardListener keyboardListener;
 
   public AppScreen(App app) {
 
@@ -19,9 +25,22 @@ public class AppScreen extends JPanel {
 
   }
 
+  // Antes los inputs estaban en la case App, pero eso hacía que la posición del
+  // mouse fuera incorrectaf
+  public void initInputs() {
+    myMouseListener = new MyMouseListener(app);
+    keyboardListener = new KeyboardListener();
+
+    addMouseListener(myMouseListener);
+    addMouseMotionListener(myMouseListener);
+    addKeyListener(keyboardListener);
+
+    requestFocus();
+  }
+
   private void setPanelSize() {
 
-    int width = 640;
+    int width = 840;
     int height = 640;
 
     size = new Dimension(width, height);

@@ -26,6 +26,9 @@ public class Render {
     case EDIT:
       app.getEdit().render(g);
       break;
+    case RNDM:
+      app.getRndm().render(g);
+      break;
     }
 
   }
